@@ -1,6 +1,8 @@
-﻿namespace rpg.Models
+﻿using rpg.Services.BaseClass;
+
+namespace rpg.Models
 {
-    public class Character
+    public class Character  : IEntity
     {
         public int Id { get; set; }
         public string Name { get; set; } = "Frodo";
