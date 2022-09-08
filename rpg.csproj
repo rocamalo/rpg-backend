@@ -22,4 +22,8 @@
     <PackageReference Include="Swashbuckle.AspNetCore.Filters" Version="7.0.4" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Resources\images\" />
+  </ItemGroup>
+
 </Project>

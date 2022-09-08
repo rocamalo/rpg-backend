@@ -2,6 +2,7 @@
 using rpg.Dtos.Character;
 using rpg.Dtos.Fight;
 using rpg.Dtos.Skill;
+using rpg.Dtos.User;
 using rpg.Dtos.Weapon;
 
 namespace rpg
@@ -17,6 +18,7 @@ namespace rpg
             CreateMap<Weapon, GetWeaponDto>();
             CreateMap<Skill, GetSkillDto>();
             CreateMap<Character, HighscoreDto>();
+            CreateMap<User, GetUserDto>();
         }
     }
 }

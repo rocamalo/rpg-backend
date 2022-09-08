@@ -41,9 +41,9 @@ namespace rpg.Services.AuthService
             return response;
         }
 
-        public async Task<ServiceResponse<string>> Login(string username, string password)
+        public async Task<ServiceResponse<List<KeyValuePair<string, string>>>> Login(string username, string password)
         {
-            var response = new ServiceResponse<string>();
+            var response = new ServiceResponse<List<KeyValuePair<string, string>>>();
             var user = await _context.Users
                 .FirstOrDefaultAsync(u => u.Username.ToLower().Equals(username.ToLower()));
 
@@ -60,6 +60,7 @@ namespace rpg.Services.AuthService
             else
             {
                 response.Data = CreateToken(user);
+                
             }
 
             return response;
@@ -94,7 +95,7 @@ namespace rpg.Services.AuthService
             }
         }
 
-        private string CreateToken(User user)
+        private List<KeyValuePair<string, string>> CreateToken(User user)
         {
             List<Claim> claims = new List<Claim> {
                 new Claim(ClaimTypes.NameIdentifier, user.Id.ToString()), //user id
@@ -116,7 +117,13 @@ namespace rpg.Services.AuthService
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
             SecurityToken token = tokenHandler.CreateToken(tokenDescriptor);
 
-            return tokenHandler.WriteToken(token); //we return the token as string
+            var list = new List<KeyValuePair<string, string>>();
+            list.Add(new KeyValuePair<string, string>("id", user.Id.ToString()));
+            list.Add(new KeyValuePair<string, string>("token", tokenHandler.WriteToken(token))); //we return the token as string
+            list.Add(new KeyValuePair<string, string>("username", user.Username));
+            list.Add(new KeyValuePair<string, string>("imgpath", user.profilePicturePath));
+
+            return list; 
         }
 
 

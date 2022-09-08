@@ -6,6 +6,8 @@
         public string Username { get; set; } = string.Empty;
         public byte[] PasswordHash { get; set; }
 
+        public string profilePicturePath { get; set; }  
+
         public byte[] PasswordSalt { get; set; }
 
         //con esto se hace la relacion automaticamente

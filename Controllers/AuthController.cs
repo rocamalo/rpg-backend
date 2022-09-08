@@ -30,7 +30,7 @@ namespace rpg.Controllers
         }
 
         [HttpPost("login")]
-        public async Task<ActionResult<ServiceResponse<string>>> Login(UserLoginDto request)
+        public async Task<ActionResult<ServiceResponse<List<KeyValuePair<string, string>>>>> Login(UserLoginDto request)
         {
             var response = await _authRepo.Login(request.Username, request.Password);
             if (!response.Success)
